@@ -28,71 +28,74 @@
 </head>
 <body>
 <div class="container">
-    <div id="header" class="center">
-        <div>
-            <p><h1>Vacation Roulette</h1></p>
-            <p><h2>Find a vacation</h2></p>
-            <h2>
-                <table id="the-god-damn-table">
-                    <tr>
-                        <td class="table-input-label">leaving</td>
-                        <td clas="table-input"><input id="leave-date" class="sentence-input datepicker" type="text" readonly/></td>
-                    </tr>
-                    <tr>
-                        <td class="table-input-label">from</td>
-                        <td clas="table-input"><input id="airport" class="sentence-input airportpicker" type="text"g/></td>
-                    </tr>
-                    <tr>
-                        <td class="table-input-label">returning</td>
-                        <td clas="table-input"><input id="return-date" class="sentence-input datepicker" type="text" readonly/></td>
-                    </tr>
-                </table>
-            </h2>
-        </div>
-    </div>
-    <div class="pure-g pure-g-centered">
-        <div class="pure-u-1-4 pure-u-md-1-8 filter-column">
-            <div id="filter-price" class="pure-menu pure-menu-scrollable filter-menu">
-                <ul class="pure-menu-list">
-                    <li class="pure-menu-item"><a class="pure-menu-link active" href="#">???</a></li>
-                    <li class="pure-menu-item"><a class="pure-menu-link" href="#">$</a></li>
-                    <li class="pure-menu-item"><a class="pure-menu-link" href="#">$$</a></li>
-                    <li class="pure-menu-item"><a class="pure-menu-link" href="#">$$$</a></li>
-                </ul>
+    <form name="form">
+
+        <div id="header" class="center">
+            <div>
+                <p><h1>Vacation Roulette</h1></p>
+                <p><h2>Find a vacation</h2></p>
+                <h2>
+                    <table id="the-god-damn-table">
+                        <tr>
+                            <td class="table-input-label">leaving</td>
+                            <td class="table-input"><input id="leave-date" class="sentence-input datepicker" type="text" required readonly/></td>
+                        </tr>
+                        <tr>
+                            <td class="table-input-label">from</td>
+                            <td class="table-input"><input id="airport" class="sentence-input airportpicker" type="text" required/></td>
+                        </tr>
+                        <tr>
+                            <td class="table-input-label">returning</td>
+                            <td class="table-input"><input id="return-date" class="sentence-input datepicker" type="text" required readonly/></td>
+                        </tr>
+                    </table>
+                </h2>
             </div>
         </div>
-        <div class="pure-u-1-2 pure-u-md-1-4 filter-column">
-            <div id="filter-theme" class="pure-menu pure-menu-scrollable filter-menu">
-                <ul class="pure-menu-list">
-                    <li class="pure-menu-item"><a class="pure-menu-link active" href="#">???</a></li>
-                    <li class="pure-menu-item"><a class="pure-menu-link" href="#">Beach</a></li>
-                    <li class="pure-menu-item"><a class="pure-menu-link" href="#">Disney</a></li>
-                    <li class="pure-menu-item"><a class="pure-menu-link" href="#">Gambling</a></li>
-                    <li class="pure-menu-item"><a class="pure-menu-link" href="#">Historic</a></li>
-                    <li class="pure-menu-item"><a class="pure-menu-link" href="#">Mountains</a></li>
-                    <li class="pure-menu-item"><a class="pure-menu-link" href="#">National Parks</a></li>
-                    <li class="pure-menu-item"><a class="pure-menu-link" href="#">Outdoors</a></li>
-                    <li class="pure-menu-item"><a class="pure-menu-link" href="#">Romantic</a></li>
-                    <li class="pure-menu-item"><a class="pure-menu-link" href="#">Shopping</a></li>
-                    <li class="pure-menu-item"><a class="pure-menu-link" href="#">Skiing</a></li>
-                    <li class="pure-menu-item"><a class="pure-menu-link" href="#">Theme Park</a></li>
-                </ul>
+        <div class="pure-g pure-g-centered">
+            <div class="pure-u-1-4 pure-u-md-1-8 filter-column">
+                <div id="filter-price" class="pure-menu pure-menu-scrollable filter-menu">
+                    <ul class="pure-menu-list">
+                        <li class="pure-menu-item"><a class="pure-menu-link active" href="#">???</a></li>
+                        <li class="pure-menu-item"><a class="pure-menu-link" href="#">$</a></li>
+                        <li class="pure-menu-item"><a class="pure-menu-link" href="#">$$</a></li>
+                        <li class="pure-menu-item"><a class="pure-menu-link" href="#">$$$</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="pure-u-1-2 pure-u-md-1-4 filter-column">
+                <div id="filter-theme" class="pure-menu pure-menu-scrollable filter-menu">
+                    <ul class="pure-menu-list">
+                        <li class="pure-menu-item"><a class="pure-menu-link active" href="#">???</a></li>
+                        <li class="pure-menu-item"><a class="pure-menu-link" href="#">Beach</a></li>
+                        <li class="pure-menu-item"><a class="pure-menu-link" href="#">Disney</a></li>
+                        <li class="pure-menu-item"><a class="pure-menu-link" href="#">Gambling</a></li>
+                        <li class="pure-menu-item"><a class="pure-menu-link" href="#">Historic</a></li>
+                        <li class="pure-menu-item"><a class="pure-menu-link" href="#">Mountains</a></li>
+                        <li class="pure-menu-item"><a class="pure-menu-link" href="#">National Parks</a></li>
+                        <li class="pure-menu-item"><a class="pure-menu-link" href="#">Outdoors</a></li>
+                        <li class="pure-menu-item"><a class="pure-menu-link" href="#">Romantic</a></li>
+                        <li class="pure-menu-item"><a class="pure-menu-link" href="#">Shopping</a></li>
+                        <li class="pure-menu-item"><a class="pure-menu-link" href="#">Skiing</a></li>
+                        <li class="pure-menu-item"><a class="pure-menu-link" href="#">Theme Park</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="pure-u-1-4 pure-u-md-1-8 filter-column">
+                <div id="filter-distance" class="pure-menu pure-menu-scrollable filter-menu">
+                    <ul class="pure-menu-list">
+                        <li class="pure-menu-item"><a class="pure-menu-link active" href="#">???</a></li>
+                        <li class="pure-menu-item"><a class="pure-menu-link" href="#">Near</a></li>
+                        <li class="pure-menu-item"><a class="pure-menu-link" href="#">Fair</a></li>
+                        <li class="pure-menu-item"><a class="pure-menu-link" href="#">Far</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
-        <div class="pure-u-1-4 pure-u-md-1-8 filter-column">
-            <div id="filter-distance" class="pure-menu pure-menu-scrollable filter-menu">
-                <ul class="pure-menu-list">
-                    <li class="pure-menu-item"><a class="pure-menu-link active" href="#">???</a></li>
-                    <li class="pure-menu-item"><a class="pure-menu-link" href="#">Near</a></li>
-                    <li class="pure-menu-item"><a class="pure-menu-link" href="#">Fair</a></li>
-                    <li class="pure-menu-item"><a class="pure-menu-link" href="#">Far</a></li>
-                </ul>
-            </div>
+        <div class="center">
+            <button type="submit" id="btn-search" class="pure-button pure-button-primary">Take Me Away</button>
         </div>
-    </div>
-    <div class="center">
-        <button id="btn-search" class="pure-button pure-button-primary">Take Me Away</button>
-    </div>
+    </form>
     <div class="pure-g pure-g-centered">
         <div id="results" class="pure-u-md-1-3 pure-u-1" hidden>
             <div class="pure-g">

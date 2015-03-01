@@ -23,6 +23,6 @@
     "haversine": "*",
     "jquery-auto-complete": "vacationroulette/jQuery-autoComplete",
     "font-awesome": "~4.3.0",
-   g "tooltipster": "~3.3.0"
+   "tooltipster": "~3.3.0"
   }
 }

@@ -156,7 +156,7 @@ module.exports = function(app) {
 
         var element = innerData.FareInfo;
         for (var a = 0; a < element.length; a++) {
-          element[a].OriginLocation = element.OriginLocation;
+          element[a].OriginLocation = innerData.OriginLocation;
           element[a].kayak = this.getKayakUrl(element[a]);
 
           if (element[a].CurrencyCode === 'N/A') {
