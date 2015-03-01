@@ -1,4 +1,58 @@
-.filter-menu {
-  height: 150px;
-  border: solid 1px black;
+.datepicker {
+  width: 150px;
+  text-align: center;
 }
+
+.pure-g > div {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.pure-g-centered {
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.filter-column {
+  padding: 8px;
+}
+
+.filter-menu {
+  height: 98px;
+  margin: auto;
+  width: 100%;
+  border: solid 1px gray;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.pure-menu-link.active, .pure-menu-link.active:hover {
+  background-color: #DDD;
+}
+
+.center {
+  text-align: center;
+}
+
+.filter-menu-sm {
+  width: 75%;
+}
+
+@media screen and (max-width: 35.5em) {
+  .filter-menu-sm {
+    width: 100%;
+  }
+}
+
+/* autoComplete styles */
+.autocomplete-suggestions {
+  text-align: left; cursor: default; border: 1px solid #ccc; border-top: 0; background: #fff; box-shadow: -1px 1px 3px rgba(0,0,0,.1);
+
+  /* core styles should not be changed */
+  position: absolute; display: none; z-index: 9999; max-height: 254px; overflow: hidden; overflow-y: auto; box-sizing: border-box;
+}
+.autocomplete-suggestion { position: relative; padding: 0 .6em; line-height: 23px; font-size: 1.02em; color: #333; border-bottom: solid 1px #DDD}
+.autocomplete-suggestion b { font-weight: normal; color: #1f8dd6; }
+.autocomplete-suggestion.selected { background: #f0f0f0; }
