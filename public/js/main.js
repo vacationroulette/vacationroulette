@@ -91,6 +91,10 @@ $(function(){
 
     // Set button callback
     $('form').submit(function(e){
+        if(!this.checkValidity()) {
+            alert("Some fields are missing.");
+            return;
+        }
         e.preventDefault();
         if(currentData === null)
         {

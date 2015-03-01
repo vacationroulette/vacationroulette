@@ -141,6 +141,10 @@ h2 {
   justify-content: center;
 }
 
+#header h1 {
+  font-size: 2.5em;
+}
+
 .pure-button-primary {
   background-color: #FFC107;
   margin-top: 8px;
