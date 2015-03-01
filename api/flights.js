@@ -17,7 +17,6 @@ module.exports = function(app) {
   };
 
   this.verifyRequest = function(req, cb) {
-
     if (this.is_empty(req.body.departureDate)) {
       return cb({msg: 'Departure date must be included.'}, null);
     }
@@ -69,8 +68,6 @@ module.exports = function(app) {
   };
 
   this.filterResultsByPrice = function(price, results) {
-    var _ = require('lodash');
-
     if (price !== 0) {
       results = _.sortBy(results, 'LowestFare');
       results = _.chunk(results, Math.ceil(results.length / 3))[price - 1];
@@ -79,7 +76,6 @@ module.exports = function(app) {
   };
 
   this.filterResultsByDistance = function(distance, results) {
-    var _ = require('lodash');
     var airportHelper = require('../helpers/airport');
 
     if (distance !== 0) {
@@ -147,19 +143,28 @@ module.exports = function(app) {
         location: "US"
       };
 
-      this.sabreDestinationFinder(opt, function(err, innerData) {
+      // Include the activity if not #yolo.
+      if (data.activity !== '???') {
+        opt.activity = _.kebabCase(data.activity).toUpperCase();
+      }
 
+      this.sabreDestinationFinder(opt, function(err, innerData) {
         if (err) {
           console.log('Error: ' + err);
-          return res.sendStatus(400);
+          return res.sendStatus(404);
         }
 
-        innerData.FareInfo.forEach(function(element) {
-          element.OriginLocation = innerData.OriginLocation;
-          element.kayak = this.getKayakUrl(element);
-        });
+        var element = innerData.FareInfo;
+        for (var a = 0; a < element.length; a++) {
+          element[a].OriginLocation = element.OriginLocation;
+          element[a].kayak = this.getKayakUrl(element[a]);
 
-        var filteredData = this.filterResults(data.price, data.distance, innerData.FareInfo);
+          if (element[a].CurrencyCode === 'N/A') {
+            element.splice(a, 1);
+          }
+        }
+
+        var filteredData = this.filterResults(data.price, data.distance, element);
 
         return res.status(200).send(filteredData);
       });
