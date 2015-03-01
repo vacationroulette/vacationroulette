@@ -55,7 +55,7 @@ module.exports = function(app) {
       // If the price filter is set, divide the results dataset into 3 groups
       // and take the group requested.
       var priceFilteredResults = this.filterResultsByPrice(price, results);
-      var distanceFilteredResults = this.filterResultsByDistance(price, results);
+      var distanceFilteredResults = this.filterResultsByDistance(distance, results);
       var intersectedResults = _.intersection(priceFilteredResults, distanceFilteredResults);
 
       // Ensure we actually have a result to return.
@@ -72,7 +72,7 @@ module.exports = function(app) {
     var _ = require('lodash');
 
     if (price !== 0) {
-      results = _.sortBy(results, 'price');
+      results = _.sortBy(results, 'LowestFare');
       results = _.chunk(results, Math.ceil(results.length / 3))[price - 1];
     }
     return results;
@@ -143,7 +143,8 @@ module.exports = function(app) {
         origin: data.departureLocation,
         departuredate: data.departureDate,
         returndate: data.returnDate,
-        theme: _.kebabCase(data.activity).toUpperCase()
+        theme: _.kebabCase(data.activity).toUpperCase(),
+        location: "US"
       };
 
       this.sabreDestinationFinder(opt, function(err, innerData) {
