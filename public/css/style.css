@@ -2,7 +2,7 @@
 Primary: #2196F3
 Dark Primary: #1976D2
 Light Primary: #BBDEFB
-Accent: #FF4081
+Accent: #FFC107
 Text: #FFFFFF
 Secondary: #727272
 Inverse: #212121
@@ -142,7 +142,7 @@ h2 {
 }
 
 .pure-button-primary {
-  background-color: #FF4081;
+  background-color: #FFC107;
   margin-top: 8px;
   margin-bottom: 16px;
 }
@@ -175,6 +175,7 @@ h2 {
 
 #results {
   padding: 16px;
+  margin-bottom: 16px;
   border-radius: 4px;
 }
 
@@ -213,6 +214,15 @@ h2 {
 #results h4 {
   font-weight: 300;
   margin-bottom: 0;
+}
+
+#results a {
+  color: #727272;
+  text-decoration: none;
+}
+
+#results .accent a {
+  color: #FFC107;
 }
 
 .left-border {
