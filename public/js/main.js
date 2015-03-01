@@ -91,8 +91,8 @@ $(function(){
             departureDate: leaveDatePicker.getDate(),
             departureLocation: $('#airport').val(),
             returnDate: returnDatePicker.getDate(),
-            distance: getActive($('#filter-distance')),
-            price: getActive($('#filter-price')),
+            distance: getActiveIndex($('#filter-distance')),
+            price: getActiveIndex($('#filter-price')),
             activity: getActive($('#filter-theme'))
         }
         console.log("Sending request to server: ", data)
@@ -113,4 +113,7 @@ $(function(){
 
 function getActive($menu) {
     return $menu.find('.pure-menu-link.active').html();
+}
+function getActiveIndex($menu) {
+    return $menu.find('.pure-menu-link.active').parent().index();
 }
