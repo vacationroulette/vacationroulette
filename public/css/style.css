@@ -64,8 +64,11 @@ h2 {
 }
 
 .pure-g-centered {
-  display:flex;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
   flex-direction: row;
+  -webkit-justify-content: center;
   justify-content: center;
 }
 
@@ -130,8 +133,11 @@ h2 {
 }
 
 #header {
+  display: -webkit-flex;
   display: flex;
+  -webkit-flex-direction: column;
   flex-direction: column;
+  -webkit-justify-content: center;
   justify-content: center;
 }
 
