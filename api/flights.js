@@ -1,4 +1,13 @@
+var _ = require('lodash');
+var Sabre = require('sabre-dev-studio/lib/sabre-dev-studio-flight');
+
 module.exports = function(app) {
+  var sabre = new Sabre({
+    client_id: app.config.client_id,
+    client_secret: app.config.client_secret,
+    uri: app.config.uri
+  });
+
   this.is_empty = function(key) {
     if (key === null || key === '' || key === 'undefined') {
       return true;
@@ -8,6 +17,7 @@ module.exports = function(app) {
   };
 
   this.verifyRequest = function(req, cb) {
+
     if (this.is_empty(req.body.departureDate)) {
       return cb({msg: 'Departure date must be included.'}, null);
     }
@@ -55,6 +65,7 @@ module.exports = function(app) {
       }
       return intersectedResults;
     }
+    return results;
   };
 
   this.filterResultsByPrice = function(price, results) {
@@ -68,13 +79,15 @@ module.exports = function(app) {
   };
 
   this.filterResultsByDistance = function(distance, results) {
+    console.log("In filterResultsByDistance with parameters distance = " + distance + " and results = " + JSON.stringify(results));
     var _ = require('lodash');
     var airportHelper = require('../helpers/airport');
 
     if (distance !== 0) {
       // Calculate a distance for each of the airports.
-      _.forEach(results, function(flight) {
-        flight['distance'] = airportHelper.getDistanceBetweenAirports(flight['departureLocation'], flight['arrivalLocation']);
+      results.forEach(function (flight) {
+        console.log("\n\nFlight:" + JSON.stringify(flight));
+        flight['distance'] = airportHelper.getDistanceBetweenAirports(flight['OriginLocation'], flight['DestinationLocation']);
       });
 
       // Sort and chunk the results.
@@ -82,18 +95,67 @@ module.exports = function(app) {
       results = _.chunk(results, Math.ceil(results.length / 3))[distance - 1];
 
       // Remove the distance from the results.
-      _.forEach(results, function(flight) {
+      _.forEach(results, function (flight) {
         delete flight['distance'];
       });
       return results;
     }
+
+    return results;
+  };
+
+  this.convertDate = function(input) {
+    var date = new Date(input);
+    var m = _.padLeft((date.getMonth() + 1), 2, '0');
+    var d = _.padLeft(date.getDate(), 2, '0');
+
+    return date.getFullYear() + '-' + m + '-' + d;
+  };
+
+  this.sabreDestinationFinder = function(options, cb) {
+    sabre.destination_finder(options, function(err, data) {
+      if (err) return cb(err, null);
+
+      cb(null, JSON.parse(data));
+    });
   };
 
   app.post('/api/flights', function(req, res) {
     this.verifyRequest(req, function(err, data) {
-      if (err) return res.status(400).send(err.msg);
 
-      return res.status(200).send('ok');
+      if (err) {
+        res.status(400).send(err.msg);
+        return;
+      }
+
+      // Fix our dates to be the desired sabre format.
+      data.departureDate = this.convertDate(data.departureDate);
+      data.returnDate = this.convertDate(data.returnDate);
+
+      // The filter options for the saber api call.
+      var opt = {
+        origin: data.departureLocation,
+        departuredate: data.departureDate,
+        returndate: data.returnDate,
+        theme: data.activity
+      };
+
+      this.sabreDestinationFinder(opt, function(err, data2) {
+
+        if (err) {
+          console.log('Error: ' + err);
+          return res.sendStatus(400);
+        }
+
+        data2.FareInfo.forEach(function(element) {
+          element["DepartureLocation"] = opt["origin"];
+        });
+
+
+        var filteredFareInfo = this.filterResults(data.price, data.distance, data2.FareInfo);
+
+        return res.status(200).send(filteredFareInfo);
+      });
     });
   });
 };
