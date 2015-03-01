@@ -125,7 +125,24 @@ $(function(){
                 console.log("Error response from server:", err);
                 if(err.status == 404)
                 {
-                    alert("No results found.");
+                  toastr.options = {
+                    "closeButton": false,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": false,
+                    "positionClass": "toast-top-right",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                  }
+                    toastr["error"]("Sorry", "We didn't find any results for your search.")
                 }
                 else
                     alert(JSON.stringify(err,true));
