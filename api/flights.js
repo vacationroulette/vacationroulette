@@ -64,6 +64,14 @@ module.exports = function(app) {
     });
   };
 
+  this.getKayakUrl = function(trip) {
+    var dep = trip.DepartureDateTime.split('T')[0];
+    var ret = trip.ReturnDateTime.split('T')[0];
+
+    return 'http://www.kayak.com/flights/' + trip.OriginLocation
+      + '-' + trip.DestinationLocation + '/' + dep + '/' + ret;
+  };
+
   app.post('/api/flights', function(req, res) {
     this.verifyRequest(req, function(err, data) {
       if (err) return res.status(400).send(err.msg);
@@ -85,6 +93,11 @@ module.exports = function(app) {
           console.log('Error: ' + err);
           return res.sendStatus(400);
         }
+
+        data.FareInfo.forEach(function(element) {
+          element.OriginLocation = data.OriginLocation
+          element.kayak = this.getKayakUrl(element);
+        });
 
         return res.status(200).send(data.FareInfo);
       });
