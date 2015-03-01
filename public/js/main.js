@@ -10,6 +10,8 @@ var currentDataIndex = -1;
 var makeQueryText = "Take Me Away";
 var nextItemText = "Somewhere Else, Please";
 
+var tooltipsEnabled = false;
+
 $(function(){
     // Set up date pickers
     var leaveDatePicker, returnDatePicker;
@@ -164,6 +166,11 @@ function displayData(data) {
     });
     var fromAirport = findAirportByCode(data.OriginLocation);
     var toAirport = findAirportByCode(data.DestinationLocation);
+    if(tooltipsEnabled)
+    {
+        $('#result-from-airport').tooltipster('destroy');
+        $('#result-to-airport').tooltipster('destroy');
+    }
     $('#result-from-airport').tooltipster({
         content: $('<h3>'+fromAirport.city+'</h3><h4>'+fromAirport.name+'</h4>'),
         theme: 'tooltip-theme'
@@ -172,5 +179,6 @@ function displayData(data) {
         content: $('<h3>'+toAirport.city+'</h3><h4>'+toAirport.name+'</h4>'),
         theme: 'tooltip-theme'
     });
+    tooltipsEnabled = true;
     $('#results').removeAttr('hidden');
 }
