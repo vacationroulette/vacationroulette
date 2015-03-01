@@ -153,7 +153,11 @@ $(function(){
             currentDataIndex++;
             if(currentDataIndex >= currentData.length)
                 currentDataIndex = 0;
-            displayData(currentData[currentDataIndex]);
+            $('#results > .pure-g > div').animate({opacity:0}, 250, function(){
+                displayData(currentData[currentDataIndex]);
+                $('#results > .pure-g > div').animate({opacity:1}, 250);
+            })
+
         }
     });
 
@@ -202,5 +206,5 @@ function displayData(data) {
         theme: 'tooltip-theme'
     });
     tooltipsEnabled = true;
-    $('#results').removeAttr('hidden');
+    $('#results').removeClass('invis');
 }
