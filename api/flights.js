@@ -143,7 +143,7 @@ module.exports = function(app) {
         origin: data.departureLocation,
         departuredate: data.departureDate,
         returndate: data.returnDate,
-        theme: data.activity
+        theme: _.kebabCase(data.activity).toUpperCase()
       };
 
       this.sabreDestinationFinder(opt, function(err, innerData) {

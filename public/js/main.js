@@ -101,8 +101,28 @@ $(function(){
             data: JSON.stringify(data)
         }).then(function(res){
             console.log("Received response from server: ", res);
+            if(res.length === 0)
+            {
+                alert("no results found");
+                return;
+            }
+            var data = res[0];
+            var map = {
+                "#result-from-airport": '<a href="'+data.kayak+'">'+data.OriginLocation+'</a>',
+                "#result-to-airport": '<a href="'+data.kayak+'">'+data.DestinationLocation+'</a>',
+                "#result-leave-date": moment(data.DepartureDateTime).format("MMM D"),
+                "#result-leave-day": moment(data.DepartureDateTime).format("dddd"),
+                "#result-return-date": moment(data.ReturnDateTime).format("MMM D"),
+                "#result-return-day": moment(data.ReturnDateTime).format("dddd"),
+                "#result-price": '<a href="'+data.kayak+'">$'+data.LowestFare.toFixed(0)+'</a>'
+            }
+            _.forOwn(map, function(v, k){
+                $(k).html(v);
+            });
+            $('#results').removeAttr('hidden');
         }, function(err){
             console.log("Error response from server:", err);
+            alert(JSON.stringify(err,true));
         });
     })
 });
