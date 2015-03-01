@@ -22,6 +22,7 @@
     "moment": "~2.9.0",
     "haversine": "*",
     "jquery-auto-complete": "git@github.com:vacationroulette/jQuery-autoComplete.git",
-    "font-awesome": "~4.3.0"
+    "font-awesome": "~4.3.0",
+    "tooltipster": "~3.3.0"
   }
 }

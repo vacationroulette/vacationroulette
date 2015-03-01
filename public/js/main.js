@@ -162,5 +162,15 @@ function displayData(data) {
     _.forOwn(map, function(v, k){
         $(k).html(v);
     });
+    var fromAirport = findAirportByCode(data.OriginLocation);
+    var toAirport = findAirportByCode(data.DestinationLocation);
+    $('#result-from-airport').tooltipster({
+        content: $('<h3>'+fromAirport.city+'</h3><h4>'+fromAirport.name+'</h4>'),
+        theme: 'tooltip-theme'
+    });
+    $('#result-to-airport').tooltipster({
+        content: $('<h3>'+toAirport.city+'</h3><h4>'+toAirport.name+'</h4>'),
+        theme: 'tooltip-theme'
+    });
     $('#results').removeAttr('hidden');
 }

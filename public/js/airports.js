@@ -8,3 +8,7 @@ function getClosestAirport(coords) {
         });
     });
 }
+
+function findAirportByCode(code) {
+    return _.find(airports, {code: code});
+}

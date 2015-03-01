@@ -228,3 +228,31 @@ h2 {
 .left-border {
   border-right: solid 1px #B6B6B6;
 }
+
+.tooltip-theme {
+  border-radius: 4px;
+  background: #212121;
+  color: #727272;
+  font-size: 1em;
+  line-height: 1em;
+}
+
+.tooltip-theme .tooltipster-content {
+  text-align: center;
+  font-size: 1em;
+  line-height: 1em;
+  padding: 8px;
+}
+
+.tooltipster-content h3{
+  font-weight: 300;
+  font-size: 1.5em;
+  color: #FFFFFF;
+  margin: 0;
+  margin-bottom: 8px;
+  margin-top: 4px;
+}
+
+.tooltipster-content h4 {
+  margin: 0;
+}
