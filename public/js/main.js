@@ -2,6 +2,8 @@ var dateFormat = "MMM D, YYYY";
 
 var today = new Date();
 
+var tripLengthLimit = 16;
+
 $(function(){
     // Set up date pickers
     var leaveDatePicker, returnDatePicker;
@@ -10,13 +12,10 @@ $(function(){
         format: dateFormat,
         minDate: today,
         onSelect: function(){
-            //var dayAfter = new Date(this.getDate());
-            //dayAfter.setDate(dayAfter.getDate() + 1);
-
-            //returnDatePicker.setMinDate(dayAfter);
-
             if(returnDatePicker.getDate() <= this.getDate())
                 returnDatePicker.setDate(this.getDate(), true)
+            if(returnDatePicker.getDate() >= moment(this.getDate()).add(16, 'day').toDate())
+                returnDatePicker.setDate(moment(this.getDate()).add(16, 'day').toDate(), true);
         }
     });
     leaveDatePicker.setDate(today, true);
@@ -26,16 +25,13 @@ $(function(){
         format: dateFormat,
         minDate: today,
         onSelect: function(){
-            //var dayBefore = new Date(this.getDate());
-            //dayBefore.setDate(dayBefore.getDate() - 1);
-
             if(leaveDatePicker.getDate() >= this.getDate())
                 leaveDatePicker.setDate(this.getDate(), true);
+            if(leaveDatePicker.getDate() <= moment(this.getDate()).subtract(16, 'day').toDate())
+                leaveDatePicker.setDate(moment(this.getDate()).subtract(16, 'day').toDate(), true);
         }
     });
-    var twoDaysLater = new Date(today);
-    twoDaysLater.setDate(twoDaysLater.getDate()+2);
-    returnDatePicker.setDate(twoDaysLater, true);
+    returnDatePicker.setDate(moment().add(2, 'day').toDate(), true);
 
     // Setup Filter selector thingy
     $('.pure-menu .pure-menu-link').click(function(e){
