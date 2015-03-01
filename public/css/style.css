@@ -38,6 +38,7 @@ h2 {
   font-weight: 700;
   text-align: center;
   background: none;
+  width: 150px;
   border: none;
   outline: none;
   border-bottom: dashed 1px #BBDEFB;
