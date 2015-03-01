@@ -4,6 +4,12 @@ var today = new Date();
 
 var tripLengthLimit = 16;
 
+var currentData = null;
+var currentDataIndex = -1;
+
+var makeQueryText = "Take Me Away";
+var nextItemText = "Somewhere Else, Please";
+
 $(function(){
     // Set up date pickers
     var leaveDatePicker, returnDatePicker;
@@ -77,54 +83,59 @@ $(function(){
                 if(_.includes(i.name.toLowerCase(), lowTerm))
                     return 300 + i.name.toLowerCase().indexOf(lowTerm)
             }));
-       }
+       },
+        onSelect: invalidateData
     });
 
     // Set button callback
     $('#btn-search').click(function(e){
         e.preventDefault();
-        var data = {
-            departureDate: leaveDatePicker.getDate(),
-            departureLocation: $('#airport').val(),
-            returnDate: returnDatePicker.getDate(),
-            distance: getActiveIndex($('#filter-distance')),
-            price: getActiveIndex($('#filter-price')),
-            activity: getActive($('#filter-theme'))
-        }
-        console.log("Sending request to server: ", data)
-        $.ajax
-        ({
-            type: "POST",
-            url: '/api/flights',
-            dataType: 'json',
-            contentType: 'application/json',
-            data: JSON.stringify(data)
-        }).then(function(res){
-            console.log("Received response from server: ", res);
-            if(res.length === 0)
-            {
-                alert("no results found");
-                return;
+        if(currentData === null)
+        {
+            var data = {
+                departureDate: leaveDatePicker.getDate(),
+                departureLocation: $('#airport').val(),
+                returnDate: returnDatePicker.getDate(),
+                distance: getActiveIndex($('#filter-distance')),
+                price: getActiveIndex($('#filter-price')),
+                activity: getActive($('#filter-theme'))
             }
-            var data = res[0];
-            var map = {
-                "#result-from-airport": '<a href="'+data.kayak+'">'+data.OriginLocation+'</a>',
-                "#result-to-airport": '<a href="'+data.kayak+'">'+data.DestinationLocation+'</a>',
-                "#result-leave-date": moment(data.DepartureDateTime).format("MMM D"),
-                "#result-leave-day": moment(data.DepartureDateTime).format("dddd"),
-                "#result-return-date": moment(data.ReturnDateTime).format("MMM D"),
-                "#result-return-day": moment(data.ReturnDateTime).format("dddd"),
-                "#result-price": '<a href="'+data.kayak+'">$'+data.LowestFare.toFixed(0)+'</a>'
-            }
-            _.forOwn(map, function(v, k){
-                $(k).html(v);
+            console.log("Sending request to server: ", data)
+            $.ajax
+            ({
+                type: "POST",
+                url: '/api/flights',
+                dataType: 'json',
+                contentType: 'application/json',
+                data: JSON.stringify(data)
+            }).then(function(res){
+                console.log("Received response from server: ", res);
+                if(res.length === 0)
+                {
+                    alert("No results found.");
+                    return;
+                }
+                currentData = res;
+                currentDataIndex = 0;
+                $('#btn-search').html(nextItemText);
+                displayData(currentData[currentDataIndex])
+            }, function(err){
+                console.log("Error response from server:", err);
+                alert(JSON.stringify(err,true));
             });
-            $('#results').removeAttr('hidden');
-        }, function(err){
-            console.log("Error response from server:", err);
-            alert(JSON.stringify(err,true));
-        });
-    })
+        }
+        else
+        {
+            currentDataIndex++;
+            if(currentDataIndex >= currentData.length)
+                currentDataIndex = 0;
+            displayData(currentData[currentDataIndex]);
+        }
+    });
+
+
+    $('input.sentence-input').on('change keyup', invalidateData);
+    $('.pure-menu-link:not(.active)').click(invalidateData);
 });
 
 function getActive($menu) {
@@ -132,4 +143,34 @@ function getActive($menu) {
 }
 function getActiveIndex($menu) {
     return $menu.find('.pure-menu-link.active').parent().index();
+}
+function invalidateData() {
+    currentData = null;
+    $('#btn-search').html(makeQueryText);
+}
+
+function displayData(data) {
+    var map = {
+        "#result-from-airport": '<a href="'+data.kayak+'">'+data.OriginLocation+'</a>',
+        "#result-to-airport": '<a href="'+data.kayak+'">'+data.DestinationLocation+'</a>',
+        "#result-leave-date": moment(data.DepartureDateTime).format("MMM D"),
+        "#result-leave-day": moment(data.DepartureDateTime).format("dddd"),
+        "#result-return-date": moment(data.ReturnDateTime).format("MMM D"),
+        "#result-return-day": moment(data.ReturnDateTime).format("dddd"),
+        "#result-price": '<a href="'+data.kayak+'">$'+data.LowestFare.toFixed(0)+'</a>'
+    }
+    _.forOwn(map, function(v, k){
+        $(k).html(v);
+    });
+    var fromAirport = findAirportByCode(data.OriginLocation);
+    var toAirport = findAirportByCode(data.DestinationLocation);
+    $('#result-from-airport').tooltipster({
+        content: $('<h3>'+fromAirport.city+'</h3><h4>'+fromAirport.name+'</h4>'),
+        theme: 'tooltip-theme'
+    });
+    $('#result-to-airport').tooltipster({
+        content: $('<h3>'+toAirport.city+'</h3><h4>'+toAirport.name+'</h4>'),
+        theme: 'tooltip-theme'
+    });
+    $('#results').removeAttr('hidden');
 }

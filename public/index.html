@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="bower_components/pikaday/css/pikaday.css"/>
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,600,700,800' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="bower_components/tooltipster/css/tooltipster.css"/>
     <link rel="stylesheet" href="css/style.css"/>
 
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
@@ -20,6 +21,7 @@
     <script src="bower_components/lodash/lodash.min.js"></script>
     <script src="bower_components/backbone/backbone.js"></script>
     <script src="bower_components/haversine/haversine.js"></script>
+    <script src="bower_components/tooltipster/js/jquery.tooltipster.min.js"></script>
     <script src="js/airports.js"></script>
     <script src="js/main.js"></script>
 
@@ -34,15 +36,15 @@
                 <table id="the-god-damn-table">
                     <tr>
                         <td class="table-input-label">leaving</td>
-                        <td clas="table-input"><input id="leave-date" class="sentence-input datepicker" type="text"/></td>
+                        <td clas="table-input"><input id="leave-date" class="sentence-input datepicker" type="text" readonly/></td>
                     </tr>
                     <tr>
                         <td class="table-input-label">from</td>
-                        <td clas="table-input"><input id="airport" class="sentence-input airportpicker" type="text"/></td>
+                        <td clas="table-input"><input id="airport" class="sentence-input airportpicker" type="text"g/></td>
                     </tr>
                     <tr>
                         <td class="table-input-label">returning</td>
-                        <td clas="table-input"><input id="return-date" class="sentence-input datepicker" type="text"/></td>
+                        <td clas="table-input"><input id="return-date" class="sentence-input datepicker" type="text" readonly/></td>
                     </tr>
                 </table>
             </h2>
