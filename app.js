@@ -20,7 +20,7 @@ app.api = require('./api/index')(app);
 // production error handler
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
-  if (err) console.log('Error: ' + JSON.parse(err));
+  if (err) console.log('Error: ' + err);
 });
 
 module.exports = app;
