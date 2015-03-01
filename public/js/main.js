@@ -53,8 +53,36 @@ $(function(){
                 latitude: position.coords.latitude,
                 longitude: position.coords.longitude
             };
-            $('#airport').val(here.latitude+","+here.longitude);
+            var airport = getClosestAirport(here);
+            $('#airport').val(airport.code);
         });
+
+    // Set airport autocomplete
+    $('#airport').autoComplete({
+        minChars: 1,
+        cache: false, // Gives some weird results
+        renderItem: function(item, search) {
+            var itemStr = item.city + " - " + item.name + " (" + item.code + ")";
+            var re = new RegExp("(" + search.split(' ').join('|') + ")", "gi");
+            return '<div class="autocomplete-suggestion" data-val="' + item.code + '">' + itemStr.replace(re, '<b>$1</b>') + '</div>';
+        },
+        source: function(term, response) {
+            var lowTerm = term.toLowerCase();
+            var matched = _.filter(airports, function(airport){
+                return _.some(['city', 'code', 'name'], function(prop){
+                    return _.includes(airport[prop].toLowerCase(), lowTerm);
+                });
+            });
+            response(_.sortBy(matched, function(i){ // JANKY ASS RANKING RIGHT HERE
+                if(_.includes(i.code.toLowerCase(), lowTerm))
+                    return 100 + i.code.toLowerCase().indexOf(lowTerm)
+                if(_.includes(i.city.toLowerCase(), lowTerm))
+                    return 200 + i.city.toLowerCase().indexOf(lowTerm)
+                if(_.includes(i.name.toLowerCase(), lowTerm))
+                    return 300 + i.name.toLowerCase().indexOf(lowTerm)
+            }));
+       }
+    });
 
     // Set button callback
     $('#btn-search').click(function(e){
@@ -67,7 +95,19 @@ $(function(){
             price: getActive($('#filter-price')),
             activity: getActive($('#filter-theme'))
         }
-        console.log(data);
+        console.log("Sending request to server: ", data)
+        $.ajax
+        ({
+            type: "POST",
+            url: '/api/flights',
+            dataType: 'json',
+            contentType: 'application/json',
+            data: JSON.stringify(data)
+        }).then(function(res){
+            console.log("Received response from server: ", res);
+        }, function(err){
+            console.log("Error response from server:", err);
+        });
     })
 });
 
