@@ -21,6 +21,7 @@
     "pikaday": "~1.3.2",
     "moment": "~2.9.0",
     "haversine": "*",
-    "jquery-auto-complete": "git@github.com:vacationroulette/jQuery-autoComplete.git"
+    "jquery-auto-complete": "git@github.com:vacationroulette/jQuery-autoComplete.git",
+    "font-awesome": "~4.3.0"
   }
 }

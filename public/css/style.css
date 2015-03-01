@@ -1,6 +1,60 @@
-.datepicker {
-  width: 150px;
+/*
+Primary: #2196F3
+Dark Primary: #1976D2
+Light Primary: #BBDEFB
+Accent: #FF4081
+Text: #FFFFFF
+Secondary: #727272
+Inverse: #212121
+Divider: #B6B6B6
+
+*/
+
+html, button, input, select, textarea,
+.pure-g [class *= "pure-u"] {
+  /* Set your content font stack here: */
+  font-family: "Roboto", Arial, sans-serif;
+  font-weight: 300;
+  color: #FFFFFF;
+}
+
+body {
+  background-color: #2196F3;
+}
+
+h1 {
+  font-weight: 800;
+  font-size: 3em;
+  margin-bottom: 8px;
+}
+
+h2 {
+  font-weight: 300;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.sentence-input {
+  font-weight: 700;
   text-align: center;
+  background: none;
+  width: 150px;
+  border: none;
+  outline: none;
+  border-bottom: dashed 1px #BBDEFB;
+  transition: .5s;
+}
+
+.sentence-input:focus {
+  border-bottom: dashed 1px #1976D2;
+}
+
+.datepicker {
+  /*width: 150px;*/
+}
+
+#airport {
+  /*width: 50px;*/
 }
 
 .pure-g > div {
@@ -23,9 +77,14 @@
   height: 98px;
   margin: auto;
   width: 100%;
-  border: solid 1px gray;
+  border: solid 1px #B6B6B6;
   border-radius: 4px;
   text-align: center;
+  background-color: #EEEEEE;
+}
+
+.pure-menu-link {
+  color: #727272;
 }
 
 .pure-menu-link.active, .pure-menu-link.active:hover {
@@ -51,8 +110,105 @@
   text-align: left; cursor: default; border: 1px solid #ccc; border-top: 0; background: #fff; box-shadow: -1px 1px 3px rgba(0,0,0,.1);
 
   /* core styles should not be changed */
-  position: absolute; display: none; z-index: 9999; max-height: 254px; overflow: hidden; overflow-y: auto; box-sizing: border-box;
+  position: absolute; display: none; z-index: 9999; max-height: 254px; overflow: visible; overflow-y: auto; box-sizing: border-box;
 }
 .autocomplete-suggestion { position: relative; padding: 0 .6em; line-height: 23px; font-size: 1.02em; color: #333; border-bottom: solid 1px #DDD}
 .autocomplete-suggestion b { font-weight: normal; color: #1f8dd6; }
 .autocomplete-suggestion.selected { background: #f0f0f0; }
+
+#the-god-damn-table {
+  display: inline-block
+}
+
+.table-input-label {
+  text-align: right;
+  padding-right: 8px;
+}
+
+.table-input {
+  text-align: left;
+}
+
+#header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.pure-button-primary {
+  background-color: #FF4081;
+  margin-top: 8px;
+  margin-bottom: 16px;
+}
+
+.width100 {
+  width: 100%;
+}
+.width50 {
+  width: 50%;
+}
+
+.gray {
+  background-color: gray;
+}
+.black {
+  background-color: black;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-center {
+  text-align: center;
+}
+
+#results {
+  padding: 16px;
+  border-radius: 4px;
+}
+
+#results, #results .pure-g [class *= "pure-u"] {
+  background-color: #EEE;
+  color: #727272;
+}
+
+#results h2 {
+  font-weight: 800;
+  font-size: 2.5em;
+  margin-bottom: 16px;
+}
+
+#results h2.small {
+  font-weight: 300;
+  font-size: 1em;
+  line-height: 2.5em;
+}
+
+#results h3 {
+  font-weight: 700;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+#results h3.light {
+  font-weight: 300;
+}
+
+#results h3.small {
+  font-size: 1em;
+  padding-top: 8px;
+}
+
+#results h4 {
+  font-weight: 300;
+  margin-bottom: 0;
+}
+
+.left-border {
+  border-right: solid 1px #B6B6B6;
+}
