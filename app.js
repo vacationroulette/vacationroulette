@@ -14,7 +14,17 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.config = require('./config.json');
+var fs = require('fs');
+
+if (fs.existsSync('./config.json')) {
+  app.config = require('./config.json');
+} else {
+  app.config = {
+    "client_id": process.env.CLIENT_ID,
+    "client_secret": process.env.CLIENT_SECRET,
+    "uri": process.env.URI
+  };
+}
 app.api = require('./api/index')(app);
 
 // production error handler
