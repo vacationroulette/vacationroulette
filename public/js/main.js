@@ -88,7 +88,7 @@ $(function(){
     });
 
     // Set button callback
-    $('#btn-search').click(function(e){
+    $('form').submit(function(e){
         e.preventDefault();
         if(currentData === null)
         {
