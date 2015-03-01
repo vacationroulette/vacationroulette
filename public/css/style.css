@@ -145,6 +145,7 @@ h2 {
   background-color: #FFC107;
   margin-top: 8px;
   margin-bottom: 16px;
+
 }
 
 .width100 {
@@ -177,6 +178,7 @@ h2 {
   padding: 16px;
   margin-bottom: 16px;
   border-radius: 4px;
+  transition: .5s;
 }
 
 #results, #results .pure-g [class *= "pure-u"] {
@@ -255,4 +257,24 @@ h2 {
 
 .tooltipster-content h4 {
   margin: 0;
+}
+
+@-webkit-keyframes goldPulse {
+  from { background-color: #e6ae07; -webkit-box-shadow: 0 0 9px rgba(255,193,7,.5); }
+  50% { background-color: #FFC107; -webkit-box-shadow: 0 0 18px #FFC107; }
+  to { background-color: #e6ae07; -webkit-box-shadow: 0 0 9px rgba(255,193,7,.5); }
+}
+
+#filter-price :nth-child(4) .pure-menu-link.active {
+  -webkit-animation-name: goldPulse;
+  -webkit-animation-duration: 2s;
+  -webkit-animation-iteration-count: infinite;
+}
+
+.accent {
+  color: #FFC107;
+}
+
+.invis {
+  opacity: 0;
 }
