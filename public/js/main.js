@@ -123,7 +123,12 @@ $(function(){
                 displayData(currentData[currentDataIndex])
             }, function(err){
                 console.log("Error response from server:", err);
-                alert(JSON.stringify(err,true));
+                if(err.status == 404)
+                {
+                    alert("No results found.");
+                }
+                else
+                    alert(JSON.stringify(err,true));
             });
         }
         else
