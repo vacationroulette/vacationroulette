@@ -50,7 +50,7 @@ module.exports = function(app) {
 
   this.filterResults = function(price, distance, results) {
     // If we have 3 or less results, ignore the filter.
-    if (results.length > 3) {
+    if (results.length > 4) {
       // If the price filter is set, divide the results dataset into 3 groups
       // and take the group requested.
       var priceFilteredResults = this.filterResultsByPrice(price, results);

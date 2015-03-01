@@ -92,7 +92,7 @@ $(function(){
     // Set button callback
     $('form').submit(function(e){
         if(!this.checkValidity()) {
-            alert("Some fields are missing.");
+            toastr.warning('Make sure that you have filled in all of the fields.');
             return;
         }
         e.preventDefault();
@@ -118,7 +118,7 @@ $(function(){
                 console.log("Received response from server: ", res);
                 if(res.length === 0)
                 {
-                    alert("No results found.");
+                    toastr.error('We weren\'t able to find the flight you were looking for.');
                     return;
                 }
                 currentData = res;
@@ -129,10 +129,10 @@ $(function(){
                 console.log("Error response from server:", err);
                 if(err.status == 404)
                 {
-                    alert("No results found.");
+                    toastr.error('We weren\'t able to find the flight you were looking for.');
                 }
                 else
-                    alert(JSON.stringify(err,true));
+                    toastr.error('We weren\'t able to find the flight you were looking for.');
             });
         }
         else
