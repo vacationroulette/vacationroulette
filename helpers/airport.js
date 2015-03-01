@@ -28,11 +28,9 @@ module.exports = {
    *  An object containing the longitude and latitude of the airport.
    */
   getLocationByAirportCode: function(airportCode) {
-    console.log("Finding location by airportCode: " + airportCode);
     var fileSystem = require('fs');
     var airportDataJson = fileSystem.readFileSync('./airports.min.json');
     var airportData = JSON.parse(airportDataJson);
-    console.log("Airport data: " + airportData);
     var airport = _.filter(airportData, { 'code': airportCode })[0];
     var longitude = airport.longitude;
     var latitude = airport.latitude;
@@ -54,7 +52,6 @@ module.exports = {
    *  The distance in miles between the two airports.
    */
   getDistanceBetweenAirports: function(airportCode1, airportCode2) {
-    console.log("In getDistanceBetweenAirports with parameters airportCode1 = " + airportCode1 + " and airportCode2 = " + airportCode2);
     var haversine = require('haversine');
     return haversine(
         this.getLocationByAirportCode(airportCode1),

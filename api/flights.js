@@ -79,14 +79,12 @@ module.exports = function(app) {
   };
 
   this.filterResultsByDistance = function(distance, results) {
-    console.log("In filterResultsByDistance with parameters distance = " + distance + " and results = " + JSON.stringify(results));
     var _ = require('lodash');
     var airportHelper = require('../helpers/airport');
 
     if (distance !== 0) {
       // Calculate a distance for each of the airports.
       results.forEach(function (flight) {
-        console.log("\n\nFlight:" + JSON.stringify(flight));
         flight['distance'] = airportHelper.getDistanceBetweenAirports(flight['OriginLocation'], flight['DestinationLocation']);
       });
 
@@ -120,6 +118,14 @@ module.exports = function(app) {
     });
   };
 
+  this.getKayakUrl = function(trip) {
+    var dep = trip.DepartureDateTime.split('T')[0];
+    var ret = trip.ReturnDateTime.split('T')[0];
+
+    return 'http://www.kayak.com/flights/' + trip.OriginLocation
+      + '-' + trip.DestinationLocation + '/' + dep + '/' + ret;
+  };
+
   app.post('/api/flights', function(req, res) {
     this.verifyRequest(req, function(err, data) {
 
@@ -140,21 +146,21 @@ module.exports = function(app) {
         theme: data.activity
       };
 
-      this.sabreDestinationFinder(opt, function(err, data2) {
+      this.sabreDestinationFinder(opt, function(err, innerData) {
 
         if (err) {
           console.log('Error: ' + err);
           return res.sendStatus(400);
         }
 
-        data2.FareInfo.forEach(function(element) {
-          element["DepartureLocation"] = opt["origin"];
+        innerData.FareInfo.forEach(function(element) {
+          element.OriginLocation = innerData.OriginLocation;
+          element.kayak = this.getKayakUrl(element);
         });
 
+        var filteredData = this.filterResults(data.price, data.distance, innerData.FareInfo);
 
-        var filteredFareInfo = this.filterResults(data.price, data.distance, data2.FareInfo);
-
-        return res.status(200).send(filteredFareInfo);
+        return res.status(200).send(filteredData);
       });
     });
   });
