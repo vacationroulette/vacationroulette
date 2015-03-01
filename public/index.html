@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="bower_components/pure/pure.css"/>
     <link rel="stylesheet" href="bower_components/pure/grids-responsive.css"/>
     <link rel="stylesheet" href="bower_components/pikaday/css/pikaday.css"/>
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,600,700,800' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="css/style.css"/>
 
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
@@ -24,16 +25,27 @@
 </head>
 <body>
 <div class="container">
-    <div class="header center">
-        <h1>Vacation Roulette</h1>
-        <h2>
-            Find a vacation leaving
-            <input id="leave-date" class="sentence-input datepicker" type="text"/>
-            from
-            <input id="airport" class="sentence-input airportpicker" type="text"/>,
-            returning
-            <input id="return-date" class="sentence-input datepicker" type="text"/>
-        </h2>
+    <div id="header" class="center">
+        <div>
+            <p><h1>Vacation Roulette</h1></p>
+            <p><h2>Find a vacation</h2></p>
+            <h2>
+                <table id="the-god-damn-table">
+                    <tr>
+                        <td class="table-input-label">leaving</td>
+                        <td clas="table-input"><input id="leave-date" class="sentence-input datepicker" type="text"/></td>
+                    </tr>
+                    <tr>
+                        <td class="table-input-label">from</td>
+                        <td clas="table-input"><input id="airport" class="sentence-input airportpicker" type="text"/></td>
+                    </tr>
+                    <tr>
+                        <td class="table-input-label">returning</td>
+                        <td clas="table-input"><input id="return-date" class="sentence-input datepicker" type="text"/></td>
+                    </tr>
+                </table>
+            </h2>
+        </div>
     </div>
     <div class="pure-g pure-g-centered">
         <div class="pure-u-1-4 pure-u-md-1-8 filter-column">
@@ -76,7 +88,7 @@
         </div>
     </div>
     <div class="center">
-        <button id="btn-search" class="pure-button">Take Me Away</button>
+        <button id="btn-search" class="pure-button pure-button-primary">Take Me Away</button>
     </div>
 </div>
 </body>
