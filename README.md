@@ -9,7 +9,7 @@ This is an opensource project under the MIT license, and utilizes an Expressjs e
  - [node.js](http://nodejs.org/)
 
 along with:
- - [Twiter Bootstrap](http://startbootstrap.com/)
+ - [Pure CSS](http://purecss.io/)
  - [jQuery](http://jquery.com/)
  - [lodash.js](https://lodash.com/)
  - [heroku](https://www.heroku.com/)
