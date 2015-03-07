@@ -4,7 +4,7 @@ Catch a plane without the pain!
 ## About
 VacationRoulette is a service that allows for one to find a vacation quickly without much planning. We decided to use the Sabre API to plan a spur of the moment, round-trip, vacation. With the information gathered from [Sabre](https://developer.sabre.com/page), we created dynamic [Kayak](http://www.kayak.com/) URLs to book the trip using the provider of your choice, for the lowest cost. VacationRoulette requires only a leaving/returning date and an Airport code, and provides minimal filters such as: general price point, desired theme, and relative location. Once a suggestion has been made, you may book a trip using that information, or continue looking for new trips.
 
-This is an opensource project under the MIT license, and utilizes an Expressjs environment on top Nodejs:
+This is an opensource project under the MIT license, and utilizes an Expressjs environment on top of Nodejs:
  - [Express](http://expressjs.com/)
  - [node.js](http://nodejs.org/)
 
